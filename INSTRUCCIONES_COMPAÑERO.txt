@@ -1,0 +1,153 @@
+# 🚀 Guía Rápida para tu Compañero
+
+## TL;DR (Lo más importante)
+
+Tu compañero necesita:
+1. **MySQL instalado** y corriendo
+2. **Node.js instalado**
+3. **Crear la BD**: `CREATE DATABASE agrothes;`
+4. **Configurar .env** en `server/`
+5. **Ejecutar migraciones**: `npx prisma migrate deploy`
+6. **Instalar dependencias**: `npm install` (2 veces)
+7. **Ejecutar 2 servidores**: `npm run dev` (backend + frontend)
+
+---
+
+## ⚡ Comandos que tu compañero debe ejecutar
+
+### Opción 1: AUTOMÁTICA (Recomendado)
+```
+1. Doble click en setup.bat
+2. Esperar a que termine
+3. Seguir instrucciones que aparecen
+```
+
+### Opción 2: MANUAL (Más control)
+
+```bash
+# 1. Crear la BD en MySQL
+mysql -u root -p
+# Dentro de MySQL:
+CREATE DATABASE agrothes;
+EXIT;
+
+# 2. Configurar server/.env
+# Editar: server\.env
+# Cambiar: DATABASE_URL con su contraseña MySQL
+
+# 3. Instalar backend
+cd server
+npm install
+npx prisma migrate deploy
+
+# 4. Instalar frontend
+cd ../agrothes-app
+npm install
+
+# 5. Ejecutar (necesita 2 terminales)
+# Terminal 1:
+cd server && npm run dev
+
+# Terminal 2:
+cd agrothes-app && npm run dev
+
+# 6. Abrir navegador
+# http://localhost:5173
+```
+
+---
+
+## 📋 Checklist para tu Compañero
+
+- [ ] MySQL instalado y corriendo
+- [ ] Node.js instalado (v18+)
+- [ ] Proyecto descargado/clonado
+- [ ] `server/.env` configurado con su contraseña MySQL
+- [ ] Base de datos `agrothes` creada en MySQL
+- [ ] `npx prisma migrate deploy` ejecutado sin errores
+- [ ] `npm install` en server/
+- [ ] `npm install` en agrothes-app/
+- [ ] Backend corriendo: `npm run dev` en server/
+- [ ] Frontend corriendo: `npm run dev` en agrothes-app/
+- [ ] http://localhost:5173 accesible en navegador
+
+---
+
+## 🆘 Si algo falla
+
+**Error "Cannot connect to database":**
+```bash
+# Verificar MySQL
+mysql -u root -p
+
+# Verificar credenciales en server/.env
+# Cambiar DATABASE_URL si es necesario
+
+# Intentar migraciones de nuevo
+cd server
+npx prisma migrate deploy
+```
+
+**Error "Port already in use":**
+```bash
+# Cambiar puerto en server/.env
+# PORT=3002
+
+# O matar proceso (Windows):
+netstat -ano | findstr :3001
+taskkill /PID <número> /F
+```
+
+**Error "module not found":**
+```bash
+cd server
+npm install
+npx prisma generate
+
+cd ../agrothes-app
+npm install
+```
+
+---
+
+## 📤 Cómo Enviar el Proyecto
+
+### Por ZIP (USB/Email)
+1. Comprime `AgroThes_SGP`
+2. Envía a tu compañero
+3. Él extrae y sigue estos pasos
+
+### Por Git (Si trabajan juntos)
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/...
+git push -u origin main
+
+# Tu compañero hace:
+git clone https://github.com/...
+```
+
+---
+
+## ✅ Verificación Final
+
+Si todo está bien, tu compañero deberá ver:
+
+```
+Backend:
+✓ Servidor corriendo en http://localhost:3001
+
+Frontend:
+✓ Servidor Vite corriendo en http://localhost:5173
+
+Navegador:
+✓ Interfaz de AgroThes cargada
+✓ Puede registrar animales
+✓ Los datos se guardan automáticamente
+```
+
+---
+
+**¡Listo!** 🎉

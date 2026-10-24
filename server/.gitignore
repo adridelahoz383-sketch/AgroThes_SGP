@@ -1,0 +1,19 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Variables de entorno
+.env
+.env.local
+.env.production
+
+# Prisma
+prisma/migrations/**/migration.sql
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

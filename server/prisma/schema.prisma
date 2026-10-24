@@ -1,0 +1,33 @@
+// Prisma Schema - AgroThes SGP
+// Documentación: https://pris.ly/d/prisma-schema
+// Nota: En Prisma v7 la URL de conexión se define en prisma.config.ts
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Animal {
+  id             Int        @id @default(autoincrement())
+  tipo           String     @db.VarChar(100)
+  codigo         String     @unique @db.VarChar(50)
+  fecha_registro DateTime   @default(now())
+  estado_salud   String     @db.VarChar(100)
+  peso           Float
+  registros      Registro[]
+
+  @@map("animales")
+}
+
+model Registro {
+  id       Int      @id @default(autoincrement())
+  fecha    DateTime @default(now())
+  peso     Float
+  animalId Int
+  animal   Animal   @relation(fields: [animalId], references: [id], onDelete: Cascade)
+
+  @@map("registros")
+}
